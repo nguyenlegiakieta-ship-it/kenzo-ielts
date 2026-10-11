@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenzo Study IELTS 6.5 | Lộ Trình Cho Người Mất Gốc</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f5ff',
+                            100: '#e0ebff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        },
+                        accent: '#8b5cf6'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* Custom Styles & Glassmorphism */
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .card-hover {
+            transition: all 0.25s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(99, 102, 241, 0.25);
+        }
+        /* Flashcard 3D flip effect */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.4);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 163, 175, 0.7);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- HEADER & NAVIGATION -->
+    <header class="sticky top-0 z-40 glass border-b border-slate-200 dark:border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-accent to-pink-500 flex items-center justify-center text-white font-extrabold text-xl shadow-md shadow-brand-500/20">
+                    K
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-lg sm:text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-brand-600 via-accent to-indigo-400">
+                        Kenzo Study <span class="text-xs sm:text-sm px-2 py-0.5 rounded-md bg-brand-500/10 text-brand-500 font-semibold border border-brand-500/20">IELTS 6.5</span>
+                    </h1>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">Lộ Trình Tự Học Cho Người Mất Gốc</p>
+                </div>
+            </div>
+
+            <!-- Global Search & Stats Badges -->
+            <div class="hidden md:flex items-center gap-4 flex-1 max-w-xs mx-4">
+                <div class="relative w-full">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="globalSearch" placeholder="Tìm từ vựng, ngữ pháp, bài học..." class="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 focus:outline-none focus:ring-2 focus:ring-brand-500/50 transition">
+                </div>
+            </div>
+
+            <!-- User Info Badges & Action Controls -->
+            <div class="flex items-center gap-2 sm:gap-4">
+                <!-- Streak Badge -->
+                <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 text-xs font-bold" title="Chuỗi ngày học liên tục">
+                    <i class="fa-solid fa-fire text-amber-500 animate-bounce"></i>
+                    <span id="streakCount">12</span> <span class="hidden sm:inline">Ngày</span>
+                </div>
+
+                <!-- User Level Target -->
+                <div class="hidden lg:flex flex-col text-right">
+                    <span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Xuất phát điểm</span>
+                    <span class="text-xs font-bold text-slate-700 dark:text-slate-200">Mất Gốc ➔ <span class="text-brand-500">Target 6.5</span></span>
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <button id="themeToggleBtn" class="w-9 h-9 rounded-xl flex items-center justify-center bg-slate-200/60 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-700 transition" title="Đổi Chế Độ Sáng/Tối">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                </button>
+
+                <!-- Deploy GitHub Modal Trigger -->
+                <button onclick="openModal('deployModal')" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-800 text-slate-200 hover:bg-slate-700 dark:bg-slate-200 dark:text-slate-900 dark:hover:bg-slate-300 transition shadow-sm">
+                    <i class="fa-brands fa-github text-sm"></i>
+                    <span>Xuất Bản Pages</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="border-t border-slate-200/60 dark:border-slate-800/60 bg-white/40 dark:bg-slate-950/40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 sm:space-x-4 overflow-x-auto py-1 text-xs font-semibold no-scrollbar">
+                <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn active px-3 py-2 rounded-lg text-brand-600 dark:text-brand-400 bg-brand-500/10 font-bold flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-chart-pie"></i> Overview Dashboard
+                </button>
+                <button onclick="switchTab('roadmap')" id="nav-roadmap" class="nav-btn px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-route"></i> Lộ Trình 90 Ngày
+                </button>
+                <button onclick="switchTab('skills')" id="nav-skills" class="nav-btn px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-layer-group"></i> Trung Tâm Kỹ Năng
+                </button>
+                <button onclick="switchTab('calculator')" id="nav-calculator" class="nav-btn px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-calculator"></i> Quy Đổi Band Score
+                </button>
+                <button onclick="switchTab('notebook')" id="nav-notebook" class="nav-btn px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-brand-500 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2 whitespace-nowrap">
+                    <i class="fa-solid fa-bookmark"></i> Sổ Tay Cá Nhân (<span id="notebookCount">0</span>)
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- TAB 1: OVERVIEW DASHBOARD -->
+        <section id="tab-dashboard" class="tab-content space-y-6">
+            <!-- Welcome Hero & Today's Mission -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Today's Mission Card -->
+                <div class="lg:col-span-2 relative overflow-hidden rounded-3xl bg-gradient-to-r from-brand-600 via-indigo-600 to-accent p-6 sm:p-8 text-white shadow-xl shadow-brand-500/15 flex flex-col justify-between">
+                    <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-bold backdrop-blur-md uppercase tracking-wider">🔥 Nhiệm Vụ Hôm Nay</span>
+                            <span class="text-xs text-white/80"><i class="fa-regular fa-clock mr-1"></i>Ước tính: 45 phút</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold mb-2 leading-tight">Ngày 14: Thì Hiện Tại Hoàn Thành & IELTS Speaking Part 1 (Hometown)</h2>
+                        <p class="text-white/80 text-xs sm:text-sm max-w-xl mb-6">
+                            Làm chủ ngữ pháp trọng điểm kinh điển trong IELTS và thực hành trả lời câu hỏi chủ đề "Quê hương" để đạt mốc Band 6.5 Fluency.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button onclick="openDayLesson(14)" class="px-5 py-2.5 rounded-xl bg-white text-brand-700 font-extrabold text-sm shadow-lg hover:bg-slate-100 transition transform active:scale-95">
+                            <i class="fa-solid fa-play text-brand-600 mr-2"></i> Bắt Đầu Học Tới Luôn
+                        </button>
+                        <button onclick="switchTab('roadmap')" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-medium text-sm backdrop-blur-md transition">
+                            Xem Lịch Trình Chi Tiết
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Profile Summary & Band Radar Chart -->
+                <div class="glass rounded-3xl p-6 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="font-bold text-sm text-slate-700 dark:text-slate-300">Mục Tiêu Skill Bands</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-500 font-bold">Overall: 6.5</span>
+                    </div>
+                    <div class="w-full h-48 flex items-center justify-center">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-center text-xs mt-2">
+                        <div class="p-2 rounded-xl bg-slate-100 dark:bg-slate-900">
+                            <div class="text-slate-400">Listening</div>
+                            <div class="font-bold text-slate-700 dark:text-slate-200">6.5 Target</div>
+                        </div>
+                        <div class="p-2 rounded-xl bg-slate-100 dark:bg-slate-900">
+                            <div class="text-slate-400">Reading</div>
+                            <div class="font-bold text-slate-700 dark:text-slate-200">6.5 Target</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stat Counters Row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="glass p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold">Tiến Độ Lộ Trình</span>
+                        <i class="fa-solid fa-spinner text-brand-500"></i>
+                    </div>
+                    <div class="text-2xl font-black text-slate-800 dark:text-slate-100" id="overallProgressPercent">28%</div>
+                    <div class="w-full bg-slate-200 dark:bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                        <div class="bg-brand-500 h-full rounded-full" style="width: 28%" id="overallProgressBar"></div>
+                    </div>
+                </div>
+
+                <div class="glass p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold">Từ Vựng Đã Nắm</span>
+                        <i class="fa-solid fa-book-bookmark text-amber-500"></i>
+                    </div>
+                    <div class="text-2xl font-black text-slate-800 dark:text-slate-100" id="statWordsMastered">342 / 1200</div>
+                    <span class="text-[10px] text-emerald-500 font-semibold"><i class="fa-solid fa-arrow-up mr-1"></i>+18 hôm nay</span>
+                </div>
+
+                <div class="glass p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold">Giờ Học Tích Luỹ</span>
+                        <i class="fa-solid fa-stopwatch text-purple-500"></i>
+                    </div>
+                    <div class="text-2xl font-black text-slate-800 dark:text-slate-100">42.5h</div>
+                    <span class="text-[10px] text-slate-400 font-semibold">Mục tiêu: 120 giờ</span>
+                </div>
+
+                <div class="glass p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-semibold">Độ Chính Xác Quiz</span>
+                        <i class="fa-solid fa-bullseye text-rose-500"></i>
+                    </div>
+                    <div class="text-2xl font-black text-slate-800 dark:text-slate-100">84%</div>
+                    <span class="text-[10px] text-emerald-500 font-semibold"><i class="fa-solid fa-check mr-1"></i>Đạt chuẩn Band 6.5</span>
+                </div>
+            </div>
+
+            <!-- Quick Access Skill Practice Cards -->
+            <div>
+                <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-brand-500"></i> Luyện Tập Nhanh Theo Kỹ Năng
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Vocab Flashcards Button -->
+                    <div onclick="openQuickSkill('vocab')" class="glass p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover cursor-pointer group">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center text-lg font-bold mb-3 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-layer-group"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200 mb-1">Từ Vựng Trọng Điểm</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Flashcards thông minh kèm audio & câu ví dụ chuẩn IELTS</p>
+                    </div>
+
+                    <!-- Grammar Quiz Button -->
+                    <div onclick="openQuickSkill('grammar')" class="glass p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover cursor-pointer group">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center text-lg font-bold mb-3 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-spell-check"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200 mb-1">Cấu Trúc Ngữ Pháp</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">25 chủ điểm ngữ pháp chắc chắn có trong đề thi IELTS</p>
+                    </div>
+
+                    <!-- Speaking Practice Button -->
+                    <div onclick="openQuickSkill('speaking')" class="glass p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover cursor-pointer group">
+                        <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center text-lg font-bold mb-3 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-microphone"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200 mb-1">Luyện Nói Speaking</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Ghi âm câu trả lời & so sánh đáp án mẫu Band 6.5+</p>
+                    </div>
+
+                    <!-- Writing Pad Button -->
+                    <div onclick="openQuickSkill('writing')" class="glass p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 card-hover cursor-pointer group">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center text-lg font-bold mb-3 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-pen-nib"></i>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200 mb-1">Luyện Viết Writing</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Trình đếm từ real-time & phân tích câu ghép Band 6.5</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: STRUCTURED ROADMAP -->
+        <section id="tab-roadmap" class="tab-content hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800">
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-800 dark:text-slate-100">Lộ Trình Tự Học 3 Giai Đoạn (Mất Gốc ➔ 6.5 IELTS)</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Được thiết kế tỉ mỉ theo từng ngày. Hoàn thành từng bài để mở khóa lộ trình kế tiếp.</p>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-semibold">
+                    <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Đã Hoàn Thành</span>
+                    <span class="flex items-center gap-1.5 ml-3"><span class="w-3 h-3 rounded-full bg-brand-500 animate-pulse"></span> Đang Học</span>
+                    <span class="flex items-center gap-1.5 ml-3"><span class="w-3 h-3 rounded-full bg-slate-300 dark:bg-slate-700"></span> Chưa Mở</span>
+                </div>
+            </div>
+
+            <!-- PHASE 1 -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-xl bg-brand-500/10 text-brand-500 font-black text-xs border border-brand-500/20">GIAI ĐOẠN 1</span>
+                    <h3 class="font-bold text-base text-slate-800 dark:text-slate-200">Xây Lại Nền Tảng Chắc Chắn (Band 0 ➔ 4.5)</h3>
+                    <span class="text-xs text-slate-400">(Ngày 1 - Day 30)</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="phase1Grid">
+                    <!-- Javascript will render day cards dynamically -->
+                </div>
+            </div>
+
+            <!-- PHASE 2 -->
+            <div class="space-y-4 pt-4">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-xl bg-purple-500/10 text-purple-500 font-black text-xs border border-purple-500/20">GIAI ĐOẠN 2</span>
+                    <h3 class="font-bold text-base text-slate-800 dark:text-slate-200">Tăng Tốc Kỹ Năng & Chiến Thuật (Band 4.5 ➔ 5.5)</h3>
+                    <span class="text-xs text-slate-400">(Ngày 31 - Day 60)</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3" id="phase2Grid">
+                    <!-- Javascript will render day cards dynamically -->
+                </div>
+            </div>
+
+            <!-- PHASE 3 -->
+            <div class="space-y-4 pt-4">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 rounded-xl bg-emerald-500/10 text-emerald-500 font-black text-xs border border-emerald-500/20">GIAI ĐOẠN 3</span>
+                    <h3 class="font-bold text-base text-slate-800 dark:text-slate-200">Bứt Phá Target Band 6.5 (Band 5.5 ➔ 6.5)</h3>
+                    <span class="text-xs text-slate-400">(Ngày 61 - Day 90)</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:lg:grid-cols-6 gap-3" id="phase3Grid">
+                    <!-- Javascript will render day cards dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: SKILLS HUB -->
+        <section id="tab-skills" class="tab-content hidden space-y-6">
+            <div class="glass p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800">
+                <h2 class="text-xl font-extrabold mb-1">Trung Tâm Luyện Tập 4 Kỹ Năng Chuyên Sâu</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Chọn module kỹ năng bạn muốn tập trung bổ trợ nâng điểm.</p>
+            </div>
+
+            <!-- Interactive Practice Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Skill Selection Sidebar -->
+                <div class="space-y-2">
+                    <button onclick="selectSkillModule('flashcard')" id="skillTab-flashcard" class="w-full text-left p-4 rounded-2xl font-bold text-sm bg-brand-500 text-white flex items-center justify-between shadow-md transition">
+                        <span><i class="fa-solid fa-layer-group mr-2"></i> Từ Vựng Flashcards (Topic-based)</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                    <button onclick="selectSkillModule('grammar')" id="skillTab-grammar" class="w-full text-left p-4 rounded-2xl font-bold text-sm glass hover:bg-slate-200/50 dark:hover:bg-slate-800/50 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-spell-check mr-2"></i> Ngữ Pháp Thi Thiệt (Grammar Quiz)</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                    <button onclick="selectSkillModule('speaking')" id="skillTab-speaking" class="w-full text-left p-4 rounded-2xl font-bold text-sm glass hover:bg-slate-200/50 dark:hover:bg-slate-800/50 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-microphone mr-2"></i> IELTS Speaking Part 1 & 2 Simulator</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                    <button onclick="selectSkillModule('writing')" id="skillTab-writing" class="w-full text-left p-4 rounded-2xl font-bold text-sm glass hover:bg-slate-200/50 dark:hover:bg-slate-800/50 flex items-center justify-between transition">
+                        <span><i class="fa-solid fa-pen-nib mr-2"></i> Writing Task 2 Real-Time Pad</span>
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Interactive Skill Workspace Panel -->
+                <div class="lg:col-span-2 glass p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 min-h-[420px]" id="skillWorkspace">
+                    <!-- Dynamic Interactive Skill Content will be injected here via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: BAND SCORE CALCULATOR -->
+        <section id="tab-calculator" class="tab-content hidden space-y-6">
+            <div class="glass p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800 max-w-2xl mx-auto">
+                <h2 class="text-xl font-extrabold mb-1 flex items-center gap-2">
+                    <i class="fa-solid fa-calculator text-brand-500"></i> Bảng Quy Đổi Band Score IELTS Academic
+                </h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Nhập số câu đúng (trên tổng 40 câu) để xem Band Score tương ứng của bài thi Reading và Listening.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Listening Calc -->
+                    <div class="p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-sm"><i class="fa-solid fa-headphones text-brand-500 mr-2"></i>Listening</span>
+                            <span id="listeningBandResult" class="text-2xl font-black text-brand-500">Band 6.5</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">Số câu đúng (0 - 40):</label>
+                            <input type="number" id="listeningScoreInput" min="0" max="40" value="27" oninput="calculateBandScore()" class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold text-center focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        </div>
+                        <p id="listeningAdvice" class="text-[11px] text-slate-500">Đạt 27 - 29 câu đúng: Đã vừa vặn mức Band 6.5 chuẩn hóa!</p>
+                    </div>
+
+                    <!-- Reading Calc -->
+                    <div class="p-5 rounded-2xl bg-slate-100/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-sm"><i class="fa-solid fa-book-open text-purple-500 mr-2"></i>Reading (Academic)</span>
+                            <span id="readingBandResult" class="text-2xl font-black text-purple-500">Band 6.5</span>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 mb-1">Số câu đúng (0 - 40):</label>
+                            <input type="number" id="readingScoreInput" min="0" max="40" value="27" oninput="calculateBandScore()" class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-bold text-center focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <p id="readingAdvice" class="text-[11px] text-slate-500">Đạt 27 - 29 câu đúng: Hoàn toàn làm chủ chiến thuật Skim & Scan.</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 p-4 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-center">
+                    <span class="text-xs font-bold text-slate-600 dark:text-slate-300">Dự Đoán Overall Band Score: </span>
+                    <span id="overallBandEstimated" class="text-xl font-black text-brand-600 dark:text-brand-400 ml-2">6.5</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: NOTEBOOK -->
+        <section id="tab-notebook" class="tab-content hidden space-y-6">
+            <div class="flex items-center justify-between glass p-6 rounded-3xl border border-slate-200/80 dark:border-slate-800">
+                <div>
+                    <h2 class="text-xl font-extrabold">Sổ Tay Lưu Trữ Từ Vựng & Ghi Chú</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Danh sách các từ vựng hoặc quy tắc ngữ pháp bạn đã lưu trong quá trình học.</p>
+                </div>
+                <button onclick="clearNotebook()" class="px-3 py-1.5 rounded-xl bg-rose-500/10 text-rose-500 hover:bg-rose-500/20 text-xs font-bold transition">
+                    <i class="fa-solid fa-trash mr-1"></i> Xóa Tất Cả
+                </button>
+            </div>
+
+            <div id="notebookContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <!-- Saved notes rendered by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- DAILY LESSON MODAL -->
+    <div id="lessonModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm transition-opacity">
+        <div class="glass w-full max-w-3xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-100/50 dark:bg-slate-900/50">
+                <div class="flex items-center gap-3">
+                    <span id="modalDayTag" class="px-3 py-1 rounded-full bg-brand-500 text-white font-extrabold text-xs">Day 14</span>
+                    <h3 id="modalDayTitle" class="font-bold text-base text-slate-800 dark:text-slate-100">Bài Học Ngày 14</h3>
+                </div>
+                <button onclick="closeModal('lessonModal')" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div id="modalLessonBody" class="p-6 overflow-y-auto space-y-6 text-sm">
+                <!-- Dynamic content loaded via JS -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-100/50 dark:bg-slate-900/50 flex items-center justify-between">
+                <button onclick="saveLessonCompleted()" id="btnCompleteLesson" class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-check-circle"></i> Đánh Dấu Hoàn Thành Ngày Học
+                </button>
+                <button onclick="closeModal('lessonModal')" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 font-bold text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-300 transition">
+                    Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEPLOY TO GITHUB PAGES MODAL -->
+    <div id="deployModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+        <div class="glass w-full max-w-xl rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                <h3 class="font-extrabold text-base flex items-center gap-2 text-slate-800 dark:text-slate-100">
+                    <i class="fa-brands fa-github text-brand-500 text-lg"></i> Hướng Dẫn Deploy Lên GitHub Pages
+                </h3>
+                <button onclick="closeModal('deployModal')" class="text-slate-400 hover:text-slate-200">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                Bạn muốn đưa website Kenzo Study IELTS 6.5 này hoạt động thực tế trên đường link GitHub miễn phí của bạn? Hãy làm theo 4 bước siêu đơn giản sau:
+            </p>
+
+            <ol class="space-y-3 text-xs font-medium text-slate-700 dark:text-slate-300">
+                <li class="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">1</span>
+                    <div>Lưu file code này với đúng tên chính xác là <code class="bg-brand-500/10 text-brand-500 px-1.5 py-0.5 rounded font-mono font-bold">index.html</code>.</div>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">2</span>
+                    <div>Upload hoặc Commit file <code class="text-brand-500 font-mono font-bold">index.html</code> này lên thư mục gốc (root) của Repository GitHub hiện tại của bạn.</div>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">3</span>
+                    <div>Vào GitHub ➔ **Settings** của Repo ➔ Menu **Pages** bên trái ➔ Phần **Source** chọn nhánh <code class="font-bold">main</code> (hoặc master) và bấm **Save**.</div>
+                </li>
+                <li class="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex gap-3">
+                    <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold shrink-0">4</span>
+                    <div>Đợi khoảng 1 - 2 phút, GitHub sẽ cấp cho bạn đường link xuất bản có dạng: <code class="text-emerald-500 font-mono font-bold">https://username.github.io/repository-name/</code></div>
+                </li>
+            </ol>
+
+            <div class="pt-2 flex justify-end">
+                <button onclick="closeModal('deployModal')" class="px-5 py-2 rounded-xl bg-brand-600 text-white font-bold text-xs hover:bg-brand-700 transition">
+                    Đã Hiểu, Quay Lại Học
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* APP STATE & LOCALSTORAGE DATA PERSISTENCE */
+        const APP_DATA = {
+            completedDays: JSON.parse(localStorage.getItem('kenzo_completed_days')) || [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+            savedNotes: JSON.parse(localStorage.getItem('kenzo_notebook')) || [
+                { id: 1, word: "Abolish (v)", meaning: "Bãi bỏ, hủy bỏ (luật lệ, hủ tục)", example: "The government decided to abolish the outdated tax rule." },
+                { id: 2, word: "Present Perfect Rule", meaning: "Dùng để diễn tả hành động xảy ra trong quá khứ kéo dài đến hiện tại.", example: "I have studied English for 3 months." }
+            ],
+            currentDayModal: 14,
+            activeSkillTab: 'flashcard'
+        };
+
+        // Complete 90-day Curriculum Mock Database
+        const ROADMAP_DAYS = Array.from({ length: 90 }, (_, i) => {
+            const dayNum = i + 1;
+            let phase = 1;
+            let title = "";
+            let focus = "";
+
+            if (dayNum <= 30) {
+                phase = 1;
+                const titles = [
+                    "Phát âm IPA cơ bản & Nguyên âm đơn", "Phụ âm IPA hữu thanh & vô thanh", "100 Từ vựng Topic Personal Information",
+                    "Thì Hiện tại đơn & Hiện tại tiếp diễn", "Thì Quá khứ đơn & Động từ bất quy tắc", "Kỹ năng Listening: Nhận diện con số & Tên riêng",
+                    "Luyện Nghe Dictation Chữ Cái & Địa Chỉ", "100 Từ vựng Topic Education & School", "Cấu trúc So sánh hơn & So sánh nhất",
+                    "Thực hành Reading Skimming tìm ý chính", "Chiến thuật Reading Scanning từ khóa", "Vocabulary: Daily Routines & Hobbies",
+                    "Thì Tương lai đơn (Will vs Be going to)", "Thì Hiện tại hoàn thành & Prepositions", "Luyện Speaking Part 1: Giới thiệu bản thân",
+                    "Chiến thuật trả lời IELTS Speaking Part 1", "Từ vựng Topic Work & Career", "Mệnh đề quan hệ Who, Which, That", "Kỹ năng Listening Task: Form Completion",
+                    "Kỹ năng Reading Task: Multiple Choice", "Từ vựng Topic Environment & Nature", "Câu điều kiện Loại 1 & Loại 2",
+                    "Luyện Viết Writing Task 1: Dạng Line Graph", "Cách mô tả xu hướng Tăng / Giảm trong Task 1", "Listening Task: Map Labelling cơ bản",
+                    "Reading Task: Matching Headings", "100 Từ vựng Topic Technology & Media", "Thì Quá khứ tiếp diễn vs Quá khứ đơn",
+                    "Speaking Part 1 Topic: Hometown & Accommodation", "Tổng ôn tập Phase 1 & Mini Test Band 4.5"
+                ];
+                title = titles[(dayNum - 1) % titles.length];
+                focus = "Nền tảng Band 4.5";
+            } else if (dayNum <= 60) {
+                phase = 2;
+                title = `Chiến Thuật Bứt Phá Kỹ Năng #${dayNum - 30}: Paraphrasing & Cohesive Devices`;
+                focus = "Tăng tốc Band 5.5";
+            } else {
+                phase = 3;
+                title = `Bứt Phá Band 6.5 #${dayNum - 60}: Full Test Timing & Complex Sentences`;
+                focus = "Luyện đề Band 6.5";
+            }
+
+            return {
+                day: dayNum,
+                phase: phase,
+                title: title,
+                focus: focus,
+                description: `Bài học chuyên sâu thiết kế cho ngày thứ ${dayNum}. Tập trung vào phản xạ tự nhiên và cấu trúc câu ăn điểm.`
+            };
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderRoadmapGrids();
+            updateDashboardStats();
+            initSkillRadarChart();
+            renderNotebook();
+
+            // Default quick skill setup
+            selectSkillModule('flashcard');
+        });
+
+        // Theme Switcher Logic
+        function initTheme() {
+            const toggleBtn = document.getElementById('themeToggleBtn');
+            toggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+            });
+        }
+
+        // Tab Navigation Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(el => {
+                el.classList.remove('active', 'text-brand-600', 'dark:text-brand-400', 'bg-brand-500/10', 'font-bold');
+                el.classList.add('text-slate-600', 'dark:text-slate-400');
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('active', 'text-brand-600', 'dark:text-brand-400', 'bg-brand-500/10', 'font-bold');
+                activeNav.classList.remove('text-slate-600', 'dark:text-slate-400');
+            }
+        }
+
+        // Render 90-Day Grid Layout
+        function renderRoadmapGrids() {
+            const phase1 = document.getElementById('phase1Grid');
+            const phase2 = document.getElementById('phase2Grid');
+            const phase3 = document.getElementById('phase3Grid');
+
+            phase1.innerHTML = '';
+            phase2.innerHTML = '';
+            phase3.innerHTML = '';
+
+            ROADMAP_DAYS.forEach(item => {
+                const isCompleted = APP_DATA.completedDays.includes(item.day);
+                const isCurrent = item.day === 14; // Current active day demo
+
+                let statusBadge = '';
+                let borderStyle = 'border-slate-200 dark:border-slate-800';
+
+                if (isCompleted) {
+                    statusBadge = '<i class="fa-solid fa-circle-check text-emerald-500 text-xs"></i>';
+                    borderStyle = 'border-emerald-500/30 bg-emerald-500/5';
+                } else if (isCurrent) {
+                    statusBadge = '<span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>';
+                    borderStyle = 'border-brand-500 ring-2 ring-brand-500/30 bg-brand-500/5';
+                } else {
+                    statusBadge = '<i class="fa-solid fa-lock text-slate-400 text-xs"></i>';
+                }
+
+                const cardHtml = `
+                    <div onclick="openDayLesson(${item.day})" class="glass p-3.5 rounded-2xl border ${borderStyle} card-hover cursor-pointer flex flex-col justify-between h-32 relative">
+                        <div>
+                            <div class="flex items-center justify-between mb-1.5">
+                                <span class="font-black text-xs text-brand-600 dark:text-brand-400">DAY ${item.day}</span>
+                                ${statusBadge}
+                            </div>
+                            <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 line-clamp-2 leading-snug">${item.title}</h4>
+                        </div>
+                        <div class="text-[10px] text-slate-400 font-medium truncate">${item.focus}</div>
+                    </div>
+                `;
+
+                if (item.phase === 1) phase1.innerHTML += cardHtml;
+                else if (item.phase === 2) phase2.innerHTML += cardHtml;
+                else phase3.innerHTML += cardHtml;
+            });
+        }
+
+        // Open Modal and populate Lesson Content
+        function openDayLesson(dayNum) {
+            APP_DATA.currentDayModal = dayNum;
+            const dayData = ROADMAP_DAYS.find(d => d.day === dayNum);
+
+            document.getElementById('modalDayTag').innerText = `DAY ${dayNum}`;
+            document.getElementById('modalDayTitle').innerText = dayData.title;
+
+            const isDone = APP_DATA.completedDays.includes(dayNum);
+            const btnComplete = document.getElementById('btnCompleteLesson');
+            btnComplete.innerHTML = isDone 
+                ? '<i class="fa-solid fa-rotate-left"></i> Đã Hoàn Thành (Bấm để Học Lại)'
+                : '<i class="fa-solid fa-check-circle"></i> Đánh Dấu Hoàn Thành Ngày Học';
+
+            // Lesson Body Template
+            document.getElementById('modalLessonBody').innerHTML = `
+                <div class="p-4 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-xs leading-relaxed">
+                    <span class="font-bold text-brand-600 dark:text-brand-400 uppercase">Mục tiêu bài học:</span> 
+                    Làm chủ cấu trúc thì <strong>Present Perfect (Hiện tại hoàn thành)</strong> và ghi điểm thần tốc ở IELTS Speaking Part 1 chủ đề <strong>Hometown & Accommodation</strong>.
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-extrabold text-sm text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-brand-500"></i> 1. Kiến Thức Trọng Điểm & Ngữ Pháp
+                    </h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                        Thì Hiện tại hoàn thành được dùng để diễn tả hành động đã xảy ra trong quá khứ nhưng kết quả vẫn liên quan đến hiện tại, hoặc kinh nghiệm đã làm được.
+                    </p>
+                    <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-mono text-xs">
+                        Công thức: <strong>S + have/has + V3/ed + ...</strong><br>
+                        Ví dụ IELTS: <em>"I have lived in Hanoi for more than ten years."</em>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-extrabold text-sm text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-font text-amber-500"></i> 2. Từ Vựng Ăn Điểm Chủ Đề Hometown
+                    </h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <span class="font-bold text-brand-500">Bustling city (adj phrase):</span> Thành phố nhộn nhịp.
+                            <button onclick="saveWordToNotebook('Bustling city', 'Thành phố nhộn nhịp', 'Hanoi is a bustling city with vibrant street food.')" class="mt-2 text-[10px] text-amber-500 font-bold block hover:underline"><i class="fa-solid fa-bookmark mr-1"></i>Lưu vào Sổ tay</button>
+                        </div>
+                        <div class="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                            <span class="font-bold text-brand-500">Tranquil countryside (n phrase):</span> Vùng quê yên bình.
+                            <button onclick="saveWordToNotebook('Tranquil countryside', 'Vùng quê yên bình', 'I prefer staying in the tranquil countryside.')" class="mt-2 text-[10px] text-amber-500 font-bold block hover:underline"><i class="fa-solid fa-bookmark mr-1"></i>Lưu vào Sổ tay</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="font-extrabold text-sm text-slate-800 dark:text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-laptop-code text-emerald-500"></i> 3. Luyện Tập Nhanh Tại Lớp
+                    </h4>
+                    <div class="p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 space-y-3">
+                        <p class="text-xs font-semibold">Chọn đáp án đúng điền vào chỗ trống:</p>
+                        <p class="text-xs font-mono">"She ________ (live) in Ho Chi Minh City since 2018."</p>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button onclick="checkQuizAnswer(this, false)" class="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 font-medium">A. lives</button>
+                            <button onclick="checkQuizAnswer(this, true)" class="p-2 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 font-medium">B. has lived</button>
+                        </div>
+                        <div id="quizFeedback" class="hidden text-xs font-bold pt-1"></div>
+                    </div>
+                </div>
+            `;
+
+            openModal('lessonModal');
+        }
+
+        // Check Quiz Answer Feedback
+        function checkQuizAnswer(btn, isCorrect) {
+            const feedback = document.getElementById('quizFeedback');
+            feedback.classList.remove('hidden', 'text-emerald-500', 'text-rose-500');
+            if (isCorrect) {
+                feedback.classList.add('text-emerald-500');
+                feedback.innerHTML = '<i class="fa-solid fa-circle-check mr-1"></i> Chính xác! "has lived" là dạng Hiện tại hoàn thành chuẩn xác.';
+            } else {
+                feedback.classList.add('text-rose-500');
+                feedback.innerHTML = '<i class="fa-solid fa-circle-xmark mr-1"></i> Sai rồi! Chú ý từ nhận biết "since 2018" dùng Present Perfect.';
+            }
+        }
+
+        // Save lesson completion toggle
+        function saveLessonCompleted() {
+            const day = APP_DATA.currentDayModal;
+            if (!APP_DATA.completedDays.includes(day)) {
+                APP_DATA.completedDays.push(day);
+            }
+            localStorage.setItem('kenzo_completed_days', JSON.stringify(APP_DATA.completedDays));
+            updateDashboardStats();
+            renderRoadmapGrids();
+            closeModal('lessonModal');
+        }
+
+        // Update overall stats
+        function updateDashboardStats() {
+            const total = 90;
+            const completedCount = APP_DATA.completedDays.length;
+            const percent = Math.round((completedCount / total) * 100);
+
+            document.getElementById('overallProgressPercent').innerText = `${percent}%`;
+            document.getElementById('overallProgressBar').style.width = `${percent}%`;
+            document.getElementById('notebookCount').innerText = APP_DATA.savedNotes.length;
+        }
+
+        function selectSkillModule(skillType) {
+            APP_DATA.activeSkillTab = skillType;
+
+            // Highlight active sidebar button
+            ['flashcard', 'grammar', 'speaking', 'writing'].forEach(st => {
+                const btn = document.getElementById(`skillTab-${st}`);
+                if (st === skillType) {
+                    btn.className = "w-full text-left p-4 rounded-2xl font-bold text-sm bg-brand-500 text-white flex items-center justify-between shadow-md transition";
+                } else {
+                    btn.className = "w-full text-left p-4 rounded-2xl font-bold text-sm glass hover:bg-slate-200/50 dark:hover:bg-slate-800/50 flex items-center justify-between transition";
+                }
+            });
+
+            const workspace = document.getElementById('skillWorkspace');
+
+            if (skillType === 'flashcard') {
+                workspace.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-base flex items-center gap-2">
+                                <i class="fa-solid fa-layer-group text-amber-500"></i> Smart Vocabulary Flashcard (Topic: Work & Office)
+                            </h3>
+                            <span class="text-xs text-slate-400">Card 1 / 10</span>
+                        </div>
+
+                        <!-- 3D Flip Card Container -->
+                        <div class="perspective-1000 w-full h-64 cursor-pointer" onclick="this.querySelector('.flip-card-inner').classList.toggle('rotate-y-180')">
+                            <div class="flip-card-inner transform-style-3d transition-transform duration-500 relative w-full h-full">
+                                <!-- Card Front -->
+                                <div class="backface-hidden absolute inset-0 rounded-3xl bg-gradient-to-tr from-slate-900 to-slate-800 text-white p-6 flex flex-col justify-between border border-slate-700 shadow-xl">
+                                    <div class="flex items-center justify-between text-xs text-slate-400">
+                                        <span>IELTS Academic Core</span>
+                                        <i class="fa-solid fa-rotate mr-1"></i> Bấm để lật
+                                    </div>
+                                    <div class="text-center">
+                                        <h2 class="text-3xl font-black text-brand-400 mb-1">Collaboration</h2>
+                                        <span class="text-xs text-slate-400 font-mono">/kəˌlæb.əˈreɪ.ʃən/ (noun)</span>
+                                    </div>
+                                    <div class="text-center text-xs text-slate-400">
+                                        <i class="fa-solid fa-volume-high text-brand-400 mr-1"></i> [Audio Simulation]
+                                    </div>
+                                </div>
+
+                                <!-- Card Back -->
+                                <div class="backface-hidden rotate-y-180 absolute inset-0 rounded-3xl bg-brand-600 text-white p-6 flex flex-col justify-between shadow-xl">
+                                    <div class="text-xs uppercase tracking-wider text-brand-200 font-bold">Nghĩa & Ví Dụ</div>
+                                    <div class="text-center space-y-2">
+                                        <h3 class="text-2xl font-black">Sự Cộng Tác / Hợp Tác</h3>
+                                        <p class="text-xs text-brand-100 italic">"Effective collaboration between team members is crucial for project success."</p>
+                                    </div>
+                                    <div class="flex justify-center gap-2">
+                                        <button onclick="event.stopPropagation(); saveWordToNotebook('Collaboration', 'Sự cộng tác', 'Effective collaboration between team members is crucial.')" class="px-3 py-1.5 rounded-xl bg-white/20 text-xs font-bold hover:bg-white/30 transition">
+                                            <i class="fa-solid fa-bookmark mr-1"></i> Lưu Sổ Tay
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-2">
+                            <button class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-xs font-bold hover:bg-slate-300 transition">Thẻ Trước</button>
+                            <button class="px-4 py-2 rounded-xl bg-brand-600 text-white text-xs font-bold hover:bg-brand-700 transition">Thẻ Kế Tiếp</button>
+                        </div>
+                    </div>
+                `;
+            } else if (skillType === 'grammar') {
+                workspace.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="font-extrabold text-base flex items-center gap-2">
+                            <i class="fa-solid fa-spell-check text-indigo-500"></i> IELTS Grammar Master: Modal Verbs in Writing
+                        </h3>
+                        <p class="text-xs text-slate-500">Chọn từ đúng để hoàn thành câu ăn điểm Hedging trong Writing Task 2:</p>
+
+                        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3">
+                            <p class="text-xs font-medium">"Governments ________ implement stricter regulations to curb plastic pollution."</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                                <button onclick="checkQuizAnswer(this, true)" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:border-brand-500">A. should</button>
+                                <button onclick="checkQuizAnswer(this, false)" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:border-brand-500">B. must to</button>
+                                <button onclick="checkQuizAnswer(this, false)" class="p-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-bold hover:border-brand-500">C. ought</button>
+                            </div>
+                            <div id="quizFeedback" class="hidden text-xs font-bold pt-1"></div>
+                        </div>
+                    </div>
+                `;
+            } else if (skillType === 'speaking') {
+                workspace.innerHTML = `
+                    <div class="space-y-4">
+                        <h3 class="font-extrabold text-base flex items-center gap-2">
+                            <i class="fa-solid fa-microphone text-rose-500"></i> IELTS Speaking Part 1 Simulator
+                        </h3>
+                        <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
+                            <span class="text-[10px] font-bold text-rose-500 uppercase">Question Prompt:</span>
+                            <p class="text-sm font-bold">"Do you work or are you a student?"</p>
+                        </div>
+
+                        <!-- Recording Simulation Controller -->
+                        <div class="p-6 rounded-2xl bg-slate-900 text-white text-center space-y-3">
+                            <div class="w-16 h-16 rounded-full bg-rose-500/20 text-rose-500 flex items-center justify-center text-2xl mx-auto border border-rose-500/30 animate-pulse">
+                                <i class="fa-solid fa-microphone"></i>
+                            </div>
+                            <div class="text-xs text-slate-400">Bấm nút bên dưới để bắt đầu thu âm trả lời (30s)</div>
+                            <button onclick="alert('Tính năng mô phỏng ghi âm giọng nói đã sẵn sàng!')" class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-md transition">
+                                Bắt Đầu Ghi Âm
+                            </button>
+                        </div>
+
+                        <!-- Band 6.5 Sample Answer -->
+                        <div class="p-4 rounded-2xl bg-brand-500/10 border border-brand-500/20 space-y-1">
+                            <span class="text-xs font-bold text-brand-500">Model Answer (Band 6.5+):</span>
+                            <p class="text-xs italic text-slate-600 dark:text-slate-300">"Currently, I am a senior student majoring in International Business at university. Alongside my studies, I also hold a part-time job as a marketing assistant."</p>
+                        </div>
+                    </div>
+                `;
+            } else if (skillType === 'writing') {
+                workspace.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-base flex items-center gap-2">
+                                <i class="fa-solid fa-pen-nib text-emerald-500"></i> IELTS Writing Task 2 Real-Time Pad
+                            </h3>
+                            <span class="text-xs font-bold text-emerald-500" id="wordCounter">0 từ (Mục tiêu: 250 từ)</span>
+                        </div>
+
+                        <div class="p-3 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs">
+                            <strong>Prompt:</strong> Some people think that university education should be free for everyone. To what extent do you agree or disagree?
+                        </div>
+
+                        <textarea id="writingInput" oninput="updateWordCount()" rows="8" placeholder="Nhập bài luận Task 2 của bạn tại đây..." class="w-full p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 leading-relaxed"></textarea>
+                    </div>
+                `;
+            }
+        }
+
+        // Live Writing Word Counter
+        function updateWordCount() {
+            const text = document.getElementById('writingInput').value.trim();
+            const words = text ? text.split(/\s+/).length : 0;
+            document.getElementById('wordCounter').innerText = `${words} từ (Mục tiêu: 250 từ)`;
+        }
+
+        function calculateBandScore() {
+            const listeningRaw = parseInt(document.getElementById('listeningScoreInput').value) || 0;
+            const readingRaw = parseInt(document.getElementById('readingScoreInput').value) || 0;
+
+            const lBand = getListeningBand(listeningRaw);
+            const rBand = getReadingBand(readingRaw);
+
+            document.getElementById('listeningBandResult').innerText = `Band ${lBand}`;
+            document.getElementById('readingBandResult').innerText = `Band ${rBand}`;
+
+            const overall = ((lBand + rBand) / 2).toFixed(1);
+            document.getElementById('overallBandEstimated').innerText = overall;
+        }
+
+        function getListeningBand(score) {
+            if (score >= 39) return 9.0;
+            if (score >= 37) return 8.5;
+            if (score >= 35) return 8.0;
+            if (score >= 32) return 7.5;
+            if (score >= 30) return 7.0;
+            if (score >= 26) return 6.5;
+            if (score >= 23) return 6.0;
+            if (score >= 18) return 5.5;
+            if (score >= 16) return 5.0;
+            return 4.0;
+        }
+
+        function getReadingBand(score) {
+            if (score >= 39) return 9.0;
+            if (score >= 37) return 8.5;
+            if (score >= 35) return 8.0;
+            if (score >= 33) return 7.5;
+            if (score >= 30) return 7.0;
+            if (score >= 27) return 6.5;
+            if (score >= 23) return 6.0;
+            if (score >= 19) return 5.5;
+            if (score >= 15) return 5.0;
+            return 4.0;
+        }
+
+        function saveWordToNotebook(word, meaning, example) {
+            const newNote = {
+                id: Date.now(),
+                word: word,
+                meaning: meaning,
+                example: example
+            };
+            APP_DATA.savedNotes.push(newNote);
+            localStorage.setItem('kenzo_notebook', JSON.stringify(APP_DATA.savedNotes));
+            updateDashboardStats();
+            renderNotebook();
+            alert(`Đã lưu "${word}" vào Sổ tay cá nhân!`);
+        }
+
+        function renderNotebook() {
+            const container = document.getElementById('notebookContainer');
+            if (APP_DATA.savedNotes.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-10 text-xs text-slate-400">Sổ tay hiện đang trống. Hãy lưu từ vựng trong quá trình học nhé!</div>`;
+                return;
+            }
+
+            container.innerHTML = APP_DATA.savedNotes.map(note => `
+                <div class="glass p-4 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2 relative group">
+                    <button onclick="deleteNote(${note.id})" class="absolute top-3 right-3 text-slate-400 hover:text-rose-500 text-xs">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                    <div class="font-black text-sm text-brand-600 dark:text-brand-400">${note.word}</div>
+                    <div class="text-xs font-semibold text-slate-700 dark:text-slate-200">${note.meaning}</div>
+                    <p class="text-[11px] text-slate-500 italic">"${note.example}"</p>
+                </div>
+            `).join('');
+        }
+
+        function deleteNote(id) {
+            APP_DATA.savedNotes = APP_DATA.savedNotes.filter(n => n.id !== id);
+            localStorage.setItem('kenzo_notebook', JSON.stringify(APP_DATA.savedNotes));
+            updateDashboardStats();
+            renderNotebook();
+        }
+
+        function clearNotebook() {
+            if (confirm('Bạn có chắc chắn muốn xóa toàn bộ sổ tay không?')) {
+                APP_DATA.savedNotes = [];
+                localStorage.setItem('kenzo_notebook', JSON.stringify([]));
+                updateDashboardStats();
+                renderNotebook();
+            }
+        }
+
+        function initSkillRadarChart() {
+            const ctx = document.getElementById('skillsRadarChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Listening', 'Reading', 'Writing', 'Speaking'],
+                    datasets: [{
+                        label: 'Mục Tiêu Target',
+                        data: [6.5, 6.5, 6.0, 6.0],
+                        backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                        borderColor: '#6366f1',
+                        borderWidth: 2,
+                        pointBackgroundColor: '#6366f1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 9,
+                            ticks: { stepSize: 2, display: false },
+                            grid: { color: 'rgba(156, 163, 175, 0.2)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
